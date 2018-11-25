@@ -92,6 +92,9 @@ while (<PARENTS>) {
 
 		};
 	} else {
+
+		my $num = ($file[1] =~ s/\//\//g);
+		next if ($num == 2);		
 		my $snp_name = $file[0]; #marker name
 		my $snp_bimorphism = $file[1]; # bimorphism
 		my $chr_num = $file[2]; #chromosome
