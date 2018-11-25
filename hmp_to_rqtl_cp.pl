@@ -134,6 +134,7 @@ while (<PARENTS>) {
 #
 #};
 
+exit;
 
 # Initialization
 my @header;
