@@ -201,11 +201,15 @@ while(<stdin>){
 
 		# Judgement for the crosstypes from parental genotypes
 		my ($parent1_geno,$parent2_geno);
-		if ($parent_hash{$snp_name} eq "") {
-			next;
-		} else {
-			($parent1_geno,$parent2_geno) = @{$parent_hash{$snp_name}};
-		};
+
+		if (defined($parent_hash{$snp_name})) {
+			if ($parent_hash{$snp_name} eq "") {
+				next;
+			} else {
+				($parent1_geno,$parent2_geno) = @{$parent_hash{$snp_name}};
+			};	
+		}
+		
 
 		next unless ($crosstype = &crosstype($parent1_geno,$parent2_geno,$alleles));
 # For debug
