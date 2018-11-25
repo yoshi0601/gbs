@@ -210,7 +210,8 @@ while(<stdin>){
 			};	
 		}
 		
-
+		next if (!(defined($parent1_geno)));
+        next if (!(defined($parent2_geno)));
 		next unless ($crosstype = &crosstype($parent1_geno,$parent2_geno,$alleles));
 # For debug
 #print "@oneline\n" if ($crosstype eq "aabb");
