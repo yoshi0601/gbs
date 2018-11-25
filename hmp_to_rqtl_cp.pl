@@ -7,7 +7,7 @@ use warnings;
 my $parent1_name = "T65";
 my $parent2_name = "PTB33";
 my $exclude_list="";
-my $display_parent = "ON"; # Here you can chose ON or OFF.
+my $display_parent = "ON"; # Here you can chose ON or OFF to include the parents genotypes.
 
 
 ###########################
