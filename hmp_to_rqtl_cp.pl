@@ -1,13 +1,34 @@
 #!/usr/bin/perl
+# --- HOW TO USE ---
+# less hapmap.txt | perl this_script.pl call_site.hapmap.txt A B ON F2_1-1,F2_1-2
+# --- OUTPUT ---
+# joinmap_CP.txt
+# joinmap_NNNP.txt
+# joinmap_LMLL.txt
+# joinmap_HKHK.txt
+# ABH.txt
+
+# The hapmap file must contain parent GBS genotyping data.
+# The first and second argument values (ARGV) of the perl script, A and B, are the parental variety 
+# names in the hapmap file. 
+# The rhird argumet value directs inclusion of parental genotypes to the R/QTL format file.
+# The fourth argument value is the comma-delimited values of individual names which are excluded from
+# converstion from hapmap to r/qtl format.
+
+
 
 use strict;
 use warnings;
 
 # User settings;
-my $parent1_name = "T65"; # Parent1 name for genotype A homozygotes.
-my $parent2_name = "PTB33"; # Parent2 name for genotype B homozygotes.
+my $parent1_name = $ARGV[1]; # Parent1 name for genotype A homozygotes.
+my $parent2_name = $ARGV[2]; # Parent2 name for genotype B homozygotes.
+my $display_parent = "IN"; # Here you can chose IN or OUT to include the parents genotypes.
 my $exclude_list=""; # 
-my $display_parent = "ON"; # Here you can chose ON or OFF to include the parents genotypes.
+
+
+$display_parent = "OUT" if ($ARGV[3] eq "OUT");
+$exclude_list = $ARGV[4] if ($ARGV[4] ne "");
 
 
 ###########################
@@ -126,7 +147,7 @@ while(<stdin>){
 	my @oneline = split(/\t/, $_);
 	my $crosstype;	
 	# Handling headers. 
-	# When the user set $diplay_parent = "OFF", columns for the $parent1_name 
+	# When the user set $diplay_parent = "OUT", columns for the $parent1_name 
 	# and $parent2_name will be not shown in output. 
 	if($oneline[0] eq 'rs#'){
 		my $counter = 0;
@@ -139,7 +160,7 @@ while(<stdin>){
 			foreach my $j (@parent1_name) {
 				if ($i eq $j) {
 					#push(@parent1_pos,$counter);	
-					push(@exclude_numbers,$counter) if $display_parent eq "OFF";
+					push(@exclude_numbers,$counter) if $display_parent eq "OUT";
 				};
 			};
 		
@@ -148,7 +169,7 @@ while(<stdin>){
 			foreach my $j (@parent2_name) {
 				if ($i eq $j) {
 					#push(@parent2_pos,$counter);
-					push(@exclude_numbers,$counter) if $display_parent eq "OFF";
+					push(@exclude_numbers,$counter) if $display_parent eq "OUT";
 				};
 			};
 
@@ -177,7 +198,8 @@ while(<stdin>){
 		};
 
 		next unless ($crosstype = &crosstype($parent1_geno,$parent2_geno,$alleles));
-print "@oneline\n" if ($crosstype eq "aabb");
+# For debug
+#print "@oneline\n" if ($crosstype eq "aabb");
 
 		# Coding CP (cross pollination) genotypes
 		for (my $column_num=11;$column_num<scalar(@oneline);$column_num++) {
