@@ -4,9 +4,9 @@ use strict;
 use warnings;
 
 # User settings;
-my $parent1_name = "T65";
-my $parent2_name = "PTB33";
-my $exclude_list="";
+my $parent1_name = "T65"; # Parent1 name for genotype A homozygotes.
+my $parent2_name = "PTB33"; # Parent2 name for genotype B homozygotes.
+my $exclude_list=""; # 
 my $display_parent = "ON"; # Here you can chose ON or OFF to include the parents genotypes.
 
 
