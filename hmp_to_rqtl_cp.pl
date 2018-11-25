@@ -26,9 +26,12 @@ my $parent2_name = $ARGV[2]; # Parent2 name for genotype B homozygotes.
 my $display_parent = "IN"; # Here you can chose IN or OUT to include the parents genotypes.
 my $exclude_list=""; # 
 
-
-$display_parent = "OUT" if ($ARGV[3] eq "OUT");
-$exclude_list = $ARGV[4] if ($ARGV[4] ne "");
+if (defined($ARGV[3])) {
+	$display_parent = "OUT" if ($ARGV[3] eq "OUT");
+}
+if (defined($ARGV[4])) {
+	$exclude_list = $ARGV[4] if ($ARGV[4] ne "");	
+}
 
 
 ###########################
@@ -137,7 +140,6 @@ while (<PARENTS>) {
 #
 #};
 
-exit;
 
 # Initialization
 my @header;
