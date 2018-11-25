@@ -96,8 +96,7 @@ while (<PARENTS>) {
 		};
 	} else {
 
-		my $num = ($file[1] =~ s/\//\//g);
-		next if ($num == 2);		
+		
 		my $snp_name = $file[0]; #marker name
 		my $snp_bimorphism = $file[1]; # bimorphism
 		my $chr_num = $file[2]; #chromosome
@@ -105,6 +104,11 @@ while (<PARENTS>) {
 		my $column_num = 0;
 		my @parent1_geno;
 		my @parent2_geno;
+
+		# Check strange data
+		next unless ($snp_bimorphism =~ /\//);
+		my $num = ($snp_bimorphism =~ s/\//\//g);
+		next if ($num == 2);
 
 		# consensus genotype for the parent1
 		foreach my $i (@parent_parent1_pos) {
