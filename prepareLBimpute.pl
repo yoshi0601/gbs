@@ -15,7 +15,7 @@ while ($line = <STDIN>) {
 	} elsif ($data[3] =~ /-/) {
 		$flag = 1;
 	} else {
-		# 問題なければさらにADに問題がないかを検査する
+		# Checking strange genotypes
 		for (my $i=9;$i<scalar(@data);$i++) {
 			@data2 = split(/:/,$data[$i]);
 			$flag = 1 if ($data2[0] eq './1' or $data2[0] eq './0' or $data2[0] eq '0/.' or $data2[0] eq '1/.');
@@ -27,7 +27,7 @@ while ($line = <STDIN>) {
 		}
 	}
 
-	# ADフラグに基づいて、その行を印刷するかを決める。
+	# Print or not by flag
 	if ($flag == 0) {
 		print "$line\n";
 	} elsif ($flag == 1) {
