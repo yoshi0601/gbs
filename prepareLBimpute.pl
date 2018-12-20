@@ -19,6 +19,7 @@ while ($line = <STDIN>) {
 		for (my $i=9;$i<scalar(@data);$i++) {
 			@data2 = split(/:/,$data[$i]);
 			$flag = 1 if ($data2[0] eq './1' or $data2[0] eq './0' or $data2[0] eq '0/.' or $data2[0] eq '1/.');
+			$flag = 1 if ($data2[2] > 300);
 			if ($data2[1] =~ /,/) {
 		
 			} else {
