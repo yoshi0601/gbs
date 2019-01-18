@@ -10,6 +10,7 @@ use warnings;
 
 
 while(<STDIN>) {    
+    print if (/^#/);
     my @data = split(/\t/);  
     my $sampleNum = scalar(@data) - 9;
     if ($sampleNum > 0) {
