@@ -13,7 +13,7 @@ VCFTOOLS='/home/gbsuser/tool/vcftools_0.1.13/cpp/vcftools'
 ## ANALYSIS PARAMETERS BY USERS
 BWA='/usr/local/bin/bwa'
 
-###################
+#####################
 #MAIN
 ###################
 TEMPDIR='tempDir/'
